@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sopa de Letras</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="Contenido">
+      <div class="Form">
+        <form action="/sopadeletras" method="post" onsubmit="return validarFormulario()">
+          <label for="numero">Número:</label><br />
+          <input type="text" id="numero" name="numero" /><br />
+          <label for="palabras">Escriba las palabras separadas por coma:</label><br />
+          <input type="text" id="palabras" name="palabras" /><br /><br />
+          <input type="submit" value="Generar Sopa de Letras" />
+        </form>
+      </div>
+      <div class="SopaSec">
+        <div class="SopaContenido">
+          <pre>{{ sopa_content }}</pre>
+        </div>
+        <div class="SopaContenido2">
+          <pre id="font">{{ recordatorio }}</pre>
+        </div>
+      </div>
+    </div>
+    <script>
+        function validarFormulario() {
+            var numero = document.getElementById("numero").value;
+            var palabras = document.getElementById("palabras").value;
+            
+            if (numero.trim() === '' || palabras.trim() === '') {
+                alert("Por favor, llene todos los campos para generar la sopa de letras");
+                return false; 
+            }
+            return true; 
+        }
+    </script>
+  </body>
+</html>
