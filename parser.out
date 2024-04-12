@@ -1,0 +1,80 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> sopa_letras
+Rule 1     sopa_letras -> TAMANO palabras
+Rule 2     palabras -> PALABRA
+Rule 3     palabras -> PALABRA COMA palabras
+
+Terminals, with rules where they appear
+
+COMA                 : 3
+PALABRA              : 2 3
+TAMANO               : 1
+error                : 
+
+Nonterminals, with rules where they appear
+
+palabras             : 1 3
+sopa_letras          : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . sopa_letras
+    (1) sopa_letras -> . TAMANO palabras
+
+    TAMANO          shift and go to state 2
+
+    sopa_letras                    shift and go to state 1
+
+state 1
+
+    (0) S' -> sopa_letras .
+
+
+
+state 2
+
+    (1) sopa_letras -> TAMANO . palabras
+    (2) palabras -> . PALABRA
+    (3) palabras -> . PALABRA COMA palabras
+
+    PALABRA         shift and go to state 4
+
+    palabras                       shift and go to state 3
+
+state 3
+
+    (1) sopa_letras -> TAMANO palabras .
+
+    $end            reduce using rule 1 (sopa_letras -> TAMANO palabras .)
+
+
+state 4
+
+    (2) palabras -> PALABRA .
+    (3) palabras -> PALABRA . COMA palabras
+
+    $end            reduce using rule 2 (palabras -> PALABRA .)
+    COMA            shift and go to state 5
+
+
+state 5
+
+    (3) palabras -> PALABRA COMA . palabras
+    (2) palabras -> . PALABRA
+    (3) palabras -> . PALABRA COMA palabras
+
+    PALABRA         shift and go to state 4
+
+    palabras                       shift and go to state 6
+
+state 6
+
+    (3) palabras -> PALABRA COMA palabras .
+
+    $end            reduce using rule 3 (palabras -> PALABRA COMA palabras .)
+
